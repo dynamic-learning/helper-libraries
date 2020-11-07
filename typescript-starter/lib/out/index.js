@@ -1,9 +1,19 @@
 "use strict";
-var MyCircle = /** @class */ (function () {
-    function MyCircle() {
+var Lib = /** @class */ (function () {
+    function Lib() {
     }
-    MyCircle.prototype.display = function () {
+    Lib.prototype.display = function () {
         circle(width / 2, height / 2, 20);
+        var sub = new Sub();
+        sub.display();
     };
-    return MyCircle;
+    return Lib;
+}());
+var Sub = /** @class */ (function () {
+    function Sub() {
+    }
+    Sub.prototype.display = function () {
+        circle(width / 3, height / 2, 20);
+    };
+    return Sub;
 }());
