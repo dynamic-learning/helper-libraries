@@ -4,7 +4,7 @@ A minimal 2d graph plotting [library](https://github.com/dynamic-learning/helper
 
 ![](https://s8.gifyu.com/images/gif6a83f470402c97fd.gif)
 
-# Sample code
+## Sample code
 
 ```
 let graph2D;

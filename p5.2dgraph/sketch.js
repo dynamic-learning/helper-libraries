@@ -1,8 +1,8 @@
-let graph2D;
+let p5graph2D;
 
 function setup() {
   createCanvas(640, 400);
-  graph2D = new Graph2D();
+  graph2D = new P5Graph2D();
 }
 
 function draw() {

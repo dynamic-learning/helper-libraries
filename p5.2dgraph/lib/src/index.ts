@@ -1,6 +1,6 @@
 let isScrolling: any;
 
-class Graph2D {
+class P5Graph2D {
   pos: p5.Vector;
   w: number;
   h: number;
