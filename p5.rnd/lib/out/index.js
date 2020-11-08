@@ -19,10 +19,18 @@ var DBox = /** @class */ (function () {
         ////////////////////////////
         this.mousePressed = function () {
             if (_this.isMouseInsideBox()) {
+                if (_this.mousePressedInside) {
+                    _this.mousePressedInside();
+                }
                 if (!DBox.canBeDragged()) {
                     return;
                 }
                 _this.isBeingDragged = true;
+            }
+            else {
+                if (_this.mousePressedOutside) {
+                    _this.mousePressedOutside();
+                }
             }
         };
         this.mouseReleased = function () {
@@ -35,11 +43,15 @@ var DBox = /** @class */ (function () {
                 y < _this.pos.y + _this.size / 2 &&
                 y > _this.pos.y - _this.size / 2);
         };
-        var pos = props.pos, size = props.size;
+        var pos = props.pos, size = props.size, mousePressedInside = props.mousePressedInside, mousePressedOutside = props.mousePressedOutside, fill = props.fill;
         this.pos = pos;
         this.size = size;
+        this.fill = fill;
         this.isBeingDragged = false;
         this.isConstrained = false;
+        this.isVisible = false;
+        this.mousePressedInside = mousePressedInside;
+        this.mousePressedOutside = mousePressedOutside;
         //@ts-ignore
         _renderer.elt.addEventListener("mousedown", this.mousePressed);
         //@ts-ignore
@@ -51,8 +63,14 @@ var DBox = /** @class */ (function () {
     DBox.prototype.display = function () {
         rectMode(CENTER);
         stroke(255);
+        strokeWeight(1.5);
         noFill();
-        square(this.pos.x, this.pos.y, this.size);
+        if (this.isVisible) {
+            if (this.fill) {
+                fill(this.fill);
+            }
+            square(this.pos.x, this.pos.y, this.size);
+        }
     };
     DBox.prototype.drawInside = function (drawFn) {
         drawFn({ pos: this.pos, size: this.size });
@@ -72,6 +90,9 @@ var DBox = /** @class */ (function () {
         return this.isPtInside(mouseX, mouseY);
     };
     ;
+    DBox.prototype.setVisible = function (visible) {
+        this.isVisible = visible;
+    };
     DBox.isAnyBeingDragged = false;
     ///////////////////////////
     //// Static method ///////
@@ -99,15 +120,28 @@ var RndBox = /** @class */ (function () {
                 y: _this.dBox.pos.y + _this.dBox.size / 2,
             });
         };
+        this.dBoxMousePressedInside = function () {
+            _this.dBox.setVisible(true);
+            _this.rBox.setVisible(true);
+        };
+        this.dBoxMousePressedOutside = function () {
+            if (!_this.rBox.isMouseInsideBox()) {
+                _this.dBox.setVisible(false);
+                _this.rBox.setVisible(false);
+            }
+        };
         var pos = props.pos, size = props.size;
-        this.rBox = new DBox({ pos: pos, size: 12 });
+        this.rBox = new DBox({ pos: pos, size: 12, fill: 255 });
         this.dBox = new DBox({
             pos: pos,
-            size: size
+            size: size,
+            mousePressedInside: this.dBoxMousePressedInside,
+            mousePressedOutside: this.dBoxMousePressedOutside,
         });
         this.rBox.isConstrained = true;
         this.dragCalled = false;
         this.resizeCalled = false;
+        this.selected = false;
         // Set pos of RBox initially
         this.setPosOfRBox();
     }

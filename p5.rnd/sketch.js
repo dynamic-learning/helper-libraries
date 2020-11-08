@@ -17,6 +17,8 @@ const drawRndBox = (rndBox) => {
   rndBox.drag();
   rndBox.resize();
   rndBox.drawInside(({ pos, size }) => {
+    fill(160,10,100);
+    noStroke();
     circle(pos.x, pos.y, size);
   });
 }
@@ -27,6 +29,7 @@ let rndBoxProp1 = {
     y: 180,
   },
   size: 100,
+  selectionStrokeWeight:2
 };
 
 let rndBoxProp2 = {
