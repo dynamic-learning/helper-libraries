@@ -1,6 +1,6 @@
 # p5.rnd
 
-Library that lets you create movable and resizable shapes in p5.js.
+[Library](https://github.com/dynamic-learning/helper-libraries/blob/main/p5.rnd/lib/out/index.js) that lets you create movable and resizable shapes in p5.js.
 
 ![](https://s8.gifyu.com/images/gif8ad726b1554dd59d.gif)
 
