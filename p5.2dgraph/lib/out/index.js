@@ -56,8 +56,8 @@ var defaultConfig = {
     strokeWeightConfig: strokeWeightConfig,
 };
 var isScrolling;
-var P5Graph2D = /** @class */ (function () {
-    function P5Graph2D(config) {
+var P52dGraph = /** @class */ (function () {
+    function P52dGraph(config) {
         var _this = this;
         this.getX = function (xPixel) {
             return (xPixel - _this.pos.x - _this.origin.x) / _this.unitX;
@@ -146,7 +146,7 @@ var P5Graph2D = /** @class */ (function () {
     /**
      * Draws the graph bounding box with axes
      */
-    P5Graph2D.prototype.display = function () {
+    P52dGraph.prototype.display = function () {
         push();
         //@ts-ignore
         translate(this.pos.x, this.pos.y);
@@ -158,7 +158,7 @@ var P5Graph2D = /** @class */ (function () {
     /**
      * Draws the main grid in the graph
      */
-    P5Graph2D.prototype.drawMainGrid = function () {
+    P52dGraph.prototype.drawMainGrid = function () {
         push();
         stroke(this.mainGridColor);
         strokeWeight(this.mainGridStrokeWeight);
@@ -167,7 +167,7 @@ var P5Graph2D = /** @class */ (function () {
         this.drawMainHorizontalGridLines();
         pop();
     };
-    P5Graph2D.prototype.drawSubGrid = function () {
+    P52dGraph.prototype.drawSubGrid = function () {
         push();
         stroke(this.subGridColor);
         strokeWeight(this.subGridStrokeWeight);
@@ -180,16 +180,16 @@ var P5Graph2D = /** @class */ (function () {
      * To activate the pan feature in the graph
      * Call inside draw loop
      */
-    P5Graph2D.prototype.pan = function () {
+    P52dGraph.prototype.pan = function () {
         if (mouseIsPressed && this.isPtWithinGraph(mouseX, mouseY)) {
             this.origin.x += mouseX - pmouseX;
             this.origin.y += mouseY - pmouseY;
         }
     };
-    P5Graph2D.prototype.zoom = function () {
+    P52dGraph.prototype.zoom = function () {
         this.disableZoomIfTimeout();
     };
-    P5Graph2D.prototype.clip = function () {
+    P52dGraph.prototype.clip = function () {
         noStroke();
         fill(this.clipColor);
         rect(0, 0, width, this.pos.y);
@@ -197,7 +197,7 @@ var P5Graph2D = /** @class */ (function () {
         rect(this.pos.x + this.w, 0, width - (this.pos.x + this.w), height);
         rect(0, this.pos.y + this.h, width, height - (this.pos.y + this.h));
     };
-    P5Graph2D.prototype.markCoords = function () {
+    P52dGraph.prototype.markCoords = function () {
         push();
         translate(this.pos.x, this.pos.y);
         this.markXCoords();
@@ -207,7 +207,7 @@ var P5Graph2D = /** @class */ (function () {
     ///////////////////////////////////////
     ////////// Private methods ///////////
     /////////////////////////////////////
-    P5Graph2D.prototype.markXCoords = function () {
+    P52dGraph.prototype.markXCoords = function () {
         var xStart = this.origin.x + this.unitX;
         var xEnd = this.w;
         this.drawXCoord(this.origin.x, 0);
@@ -220,7 +220,7 @@ var P5Graph2D = /** @class */ (function () {
             this.drawXCoord(x, counter);
         }
     };
-    P5Graph2D.prototype.markYCoords = function () {
+    P52dGraph.prototype.markYCoords = function () {
         var yStart = this.origin.y + this.unitY;
         var yEnd = this.h;
         for (var y = yStart, counter = -1; y < yEnd; y += this.unitY, counter--) {
@@ -232,7 +232,7 @@ var P5Graph2D = /** @class */ (function () {
             this.drawYCoord(y, counter);
         }
     };
-    P5Graph2D.prototype.drawXCoord = function (coord, value) {
+    P52dGraph.prototype.drawXCoord = function (coord, value) {
         push();
         fill(this.fontColor);
         textSize(this.unitX / 2.5);
@@ -242,7 +242,7 @@ var P5Graph2D = /** @class */ (function () {
         text(value, coord, this.origin.y + this.unitY / 2);
         pop();
     };
-    P5Graph2D.prototype.drawYCoord = function (coord, value) {
+    P52dGraph.prototype.drawYCoord = function (coord, value) {
         push();
         fill(this.fontColor);
         textSize(this.unitY / 2.5);
@@ -252,19 +252,19 @@ var P5Graph2D = /** @class */ (function () {
         text(value, this.origin.x - 5, coord + this.unitY / 8);
         pop();
     };
-    P5Graph2D.prototype.drawBoundingRect = function () {
+    P52dGraph.prototype.drawBoundingRect = function () {
         fill(this.backgroundColor);
         strokeWeight(this.boundaryStrokeWeight);
         stroke(this.boundaryColor);
         rect(0, 0, this.w, this.h);
     };
-    P5Graph2D.prototype.drawAxes = function () {
+    P52dGraph.prototype.drawAxes = function () {
         stroke(this.axisColor);
         strokeWeight(this.axisStrokeWeight);
         this.drawVerticalGridLine(this.origin.x);
         this.drawHorizontalGridLine(this.origin.y);
     };
-    P5Graph2D.prototype.drawMainVerticalGridLines = function () {
+    P52dGraph.prototype.drawMainVerticalGridLines = function () {
         var xStart = this.origin.x + this.unitX;
         var xEnd = this.w;
         for (var x = xStart, counter = 1; x < xEnd; x += this.unitX, counter++) {
@@ -276,7 +276,7 @@ var P5Graph2D = /** @class */ (function () {
             this.drawVerticalGridLine(x);
         }
     };
-    P5Graph2D.prototype.drawMainHorizontalGridLines = function () {
+    P52dGraph.prototype.drawMainHorizontalGridLines = function () {
         var yStart = this.origin.y + this.unitY;
         var yEnd = this.h;
         for (var y = yStart; y < yEnd; y += this.unitY) {
@@ -288,7 +288,7 @@ var P5Graph2D = /** @class */ (function () {
             this.drawHorizontalGridLine(y);
         }
     };
-    P5Graph2D.prototype.drawVerticalSubGridLines = function () {
+    P52dGraph.prototype.drawVerticalSubGridLines = function () {
         var step = this.unitX;
         // To avoid zero division error
         if (this.unitXDivisions !== 0)
@@ -310,7 +310,7 @@ var P5Graph2D = /** @class */ (function () {
             }
         }
     };
-    P5Graph2D.prototype.drawHorizontalSubGridLines = function () {
+    P52dGraph.prototype.drawHorizontalSubGridLines = function () {
         var step = this.unitY;
         if (this.unitYDivisions !== 0)
             step = this.unitY / this.unitYDivisions;
@@ -329,17 +329,17 @@ var P5Graph2D = /** @class */ (function () {
             }
         }
     };
-    P5Graph2D.prototype.drawVerticalGridLine = function (x) {
+    P52dGraph.prototype.drawVerticalGridLine = function (x) {
         if (this.isXWithinGraph(x)) {
             line(x, 0, x, this.h);
         }
     };
-    P5Graph2D.prototype.drawHorizontalGridLine = function (y) {
+    P52dGraph.prototype.drawHorizontalGridLine = function (y) {
         if (this.isYWithinGraph(y)) {
             line(0, y, this.w, y);
         }
     };
-    P5Graph2D.prototype.disableZoomIfTimeout = function () {
+    P52dGraph.prototype.disableZoomIfTimeout = function () {
         var _this = this;
         clearTimeout(this.isZoomEnabled);
         this.isZoomEnabled = setTimeout(function () {
@@ -352,7 +352,7 @@ var P5Graph2D = /** @class */ (function () {
      * @param xp x coordinate of pivot point
      * @param yp y coordinate of pivot point
      */
-    P5Graph2D.prototype.zoomOnScroll = function (mode, xp, yp) {
+    P52dGraph.prototype.zoomOnScroll = function (mode, xp, yp) {
         if (!this.isZoomEnabled) {
             return;
         }
@@ -376,11 +376,11 @@ var P5Graph2D = /** @class */ (function () {
         this.origin.x = xp - (xp - this.zoomStartOriginX) * scaleX;
         this.origin.y = yp - (yp - this.zoomStartOriginY) * scaleY;
     };
-    P5Graph2D.prototype.isXWithinGraph = function (x) {
+    P52dGraph.prototype.isXWithinGraph = function (x) {
         return x < this.w && x > 0;
     };
-    P5Graph2D.prototype.isYWithinGraph = function (y) {
+    P52dGraph.prototype.isYWithinGraph = function (y) {
         return y < this.h && y > 0;
     };
-    return P5Graph2D;
+    return P52dGraph;
 }());
