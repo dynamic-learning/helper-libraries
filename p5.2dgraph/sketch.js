@@ -1,8 +1,8 @@
-let p5graph2D;
+let p52dGraph;
 
 function setup() {
   createCanvas(640, 400);
-  graph2D = new P5Graph2D();
+  p52dGraph = new P52dGraph();
 }
 
 function draw() {
@@ -11,11 +11,11 @@ function draw() {
 }
 
 function drawGraph() {
-  graph2D.display();
-  graph2D.drawSubGrid();
-  graph2D.drawMainGrid();
-  graph2D.pan();
-  graph2D.zoom();
-  graph2D.markCoords();
-  graph2D.clip();
+  p52dGraph.display();
+  p52dGraph.drawSubGrid();
+  p52dGraph.drawMainGrid();
+  p52dGraph.pan();
+  p52dGraph.zoom();
+  p52dGraph.markCoords();
+  p52dGraph.clip();
 }
