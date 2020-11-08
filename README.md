@@ -7,3 +7,4 @@ Create a copy of the folder [typescript-starter](https://github.com/dynamic-lear
 ## Libraries added so far
 
 1. [p5.rnd](https://github.com/dynamic-learning/helper-libraries/tree/main/p5.rnd)
+2. [p5.2dgraph](https://github.com/dynamic-learning/helper-libraries/tree/main/p5.2dgraph)

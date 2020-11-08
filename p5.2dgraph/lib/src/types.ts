@@ -10,7 +10,8 @@ interface Config {
     boundary: p5.Color;
     mainGrid: p5.Color;
     subGrid: p5.Color;
-    clip: p5.Color
+    clip: p5.Color;
+    font: p5.Color;
   }
   
   interface StrokeWeightConfig {
@@ -31,5 +32,5 @@ interface Config {
     unitY: number;
     unitXDivisions: number;
     unitYDivisions: number;
+    fontSize: number;
   }
-  

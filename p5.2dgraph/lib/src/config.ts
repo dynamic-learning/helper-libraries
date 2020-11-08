@@ -4,29 +4,21 @@ const replaceDefaultConfig = (additionalConfig:any) => {
         return defaultConfig;
     }
 
-    if(additionalConfig.basicConfig) {
-        defaultConfig.basicConfig = {
-            ...defaultConfig.basicConfig,
-            ...additionalConfig.basicConfig
+    configNames.forEach((configName)=>{
+        if(additionalConfig[configName]) {
+            //@ts-ignore
+            defaultConfig[configName] = {
+                //@ts-ignore
+                ...defaultConfig[configName],
+                ...additionalConfig[configName]
+            }
         }
-    }
-
-    if(additionalConfig.colorConfig) {
-        defaultConfig.colorConfig = {
-            ...defaultConfig.colorConfig,
-            ...additionalConfig.colorConfig
-        }
-    }
-
-    if(additionalConfig.strokeWeightConfig) {
-        defaultConfig.strokeWeightConfig = {
-            ...defaultConfig.strokeWeightConfig,
-            ...additionalConfig.strokeWeightConfig
-        }
-    }
+    })
 
     return defaultConfig;
 }
+
+const configNames = ["basicConfig", "colorConfig", "strokeWeightConfig"]
 
 const colorConfig = {
     axis: 255,
@@ -34,7 +26,8 @@ const colorConfig = {
     boundary: 100,
     mainGrid: [0, 90, 130],
     subGrid: 40,
-    clip:0
+    clip:0,
+    font:255
   };
   
   const basicConfig = {
@@ -62,3 +55,4 @@ const colorConfig = {
     colorConfig,
     strokeWeightConfig,
   };
+  

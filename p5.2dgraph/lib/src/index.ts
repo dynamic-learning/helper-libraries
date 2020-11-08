@@ -16,6 +16,7 @@ class Graph2D {
   mainGridColor: p5.Color;
   subGridColor: p5.Color;
   clipColor: p5.Color;
+  fontColor: p5.Color;
 
   axisStrokeWeight: number;
   boundaryStrokeWeight: number;
@@ -55,7 +56,8 @@ class Graph2D {
       boundary: boundaryColor,
       mainGrid: mainGridColor,
       subGrid: subGridColor,
-      clip: clipColor
+      clip: clipColor,
+      font: fontColor
     } = colorConfig;
 
     const {
@@ -83,6 +85,7 @@ class Graph2D {
     this.mainGridColor = mainGridColor;
     this.subGridColor = subGridColor;
     this.clipColor = clipColor;
+    this.fontColor = fontColor;
 
     this.axisStrokeWeight = axisStrokeWeight;
     this.boundaryStrokeWeight = boundaryStrokeWeight;
@@ -156,7 +159,6 @@ class Graph2D {
     this.disableZoomIfTimeout();
   }
 
-
   public clip() {
     noStroke();
     fill(this.clipColor);
@@ -182,9 +184,66 @@ class Graph2D {
     return this.pos.y + this.origin.y - y * this.unitY;
   };
 
+  public markCoords() {
+    push();
+    translate(this.pos.x, this.pos.y);
+    this.markXCoords();
+    this.markYCoords();
+    pop();
+  }
+
   ///////////////////////////////////////
   ////////// Private methods ///////////
   /////////////////////////////////////
+
+  private markXCoords() {
+    let xStart = this.origin.x + this.unitX;
+    let xEnd = this.w;
+    this.drawXCoord(this.origin.x, 0)
+    for (let x = xStart, counter=1; x < xEnd; x += this.unitX,counter++) {
+      this.drawXCoord(x, counter)
+    }
+    xStart = this.origin.x - this.unitX;
+    xEnd = 0;
+    for (let x = xStart, counter=-1; x > xEnd; x -= this.unitX, counter--) {
+      this.drawXCoord(x, counter)
+    }
+  }
+
+  private markYCoords() {
+    let yStart = this.origin.y + this.unitY;
+    let yEnd = this.h;
+    for (let y = yStart, counter =-1; y < yEnd; y += this.unitY, counter--) {
+      this.drawYCoord(y, counter)
+    }
+    yStart = this.origin.y - this.unitY;
+    yEnd = 0;
+    for (let y = yStart, counter=1; y > yEnd; y -= this.unitY, counter++) {
+      this.drawYCoord(y, counter)
+    }
+  }
+
+  private drawXCoord(coord:number, value:number) {
+    push();
+    fill(this.fontColor)
+    textSize(this.unitX/2.5);
+    strokeWeight(1)
+    stroke(0);
+    textAlign(CENTER);
+    text(value, coord, this.origin.y+this.unitY/2)
+    pop();
+  }
+
+  private drawYCoord(coord:number, value:number) {
+    push();
+    fill(this.fontColor)
+    textSize(this.unitY/2.5)
+    strokeWeight(1)
+    stroke(0);
+    textAlign(RIGHT);
+    text(value, this.origin.x-5, coord+this.unitY/8)
+    pop();
+  }
 
   private drawBoundingRect() {
     fill(this.backgroundColor);
@@ -203,10 +262,9 @@ class Graph2D {
   private drawMainVerticalGridLines() {
     let xStart = this.origin.x + this.unitX;
     let xEnd = this.w;
-    for (let x = xStart; x < xEnd; x += this.unitX) {
+    for (let x = xStart, counter=1; x < xEnd; x += this.unitX,counter++) {
       this.drawVerticalGridLine(x);
     }
-
     xStart = this.origin.x - this.unitX;
     xEnd = 0;
     for (let x = xStart; x > xEnd; x -= this.unitX) {
@@ -220,7 +278,6 @@ class Graph2D {
     for (let y = yStart; y < yEnd; y += this.unitY) {
       this.drawHorizontalGridLine(y);
     }
-
     yStart = this.origin.y - this.unitY;
     yEnd = 0;
     for (let y = yStart; y > yEnd; y -= this.unitY) {

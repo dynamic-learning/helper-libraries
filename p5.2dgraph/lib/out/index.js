@@ -14,24 +14,23 @@ var replaceDefaultConfig = function (additionalConfig) {
     if (!additionalConfig) {
         return defaultConfig;
     }
-    if (additionalConfig.basicConfig) {
-        defaultConfig.basicConfig = __assign(__assign({}, defaultConfig.basicConfig), additionalConfig.basicConfig);
-    }
-    if (additionalConfig.colorConfig) {
-        defaultConfig.colorConfig = __assign(__assign({}, defaultConfig.colorConfig), additionalConfig.colorConfig);
-    }
-    if (additionalConfig.strokeWeightConfig) {
-        defaultConfig.strokeWeightConfig = __assign(__assign({}, defaultConfig.strokeWeightConfig), additionalConfig.strokeWeightConfig);
-    }
+    configNames.forEach(function (configName) {
+        if (additionalConfig[configName]) {
+            //@ts-ignore
+            defaultConfig[configName] = __assign(__assign({}, defaultConfig[configName]), additionalConfig[configName]);
+        }
+    });
     return defaultConfig;
 };
+var configNames = ["basicConfig", "colorConfig", "strokeWeightConfig"];
 var colorConfig = {
     axis: 255,
     background: 0,
     boundary: 100,
     mainGrid: [0, 90, 130],
     subGrid: 40,
-    clip: 0
+    clip: 0,
+    font: 255
 };
 var basicConfig = {
     x: 50,
@@ -108,7 +107,7 @@ var Graph2D = /** @class */ (function () {
         config = replaceDefaultConfig(config);
         var basicConfig = config.basicConfig, colorConfig = config.colorConfig, strokeWeightConfig = config.strokeWeightConfig;
         var x = basicConfig.x, y = basicConfig.y, w = basicConfig.w, h = basicConfig.h, originX = basicConfig.originX, originY = basicConfig.originY, unitX = basicConfig.unitX, unitY = basicConfig.unitY, unitXDivisions = basicConfig.unitXDivisions, unitYDivisions = basicConfig.unitYDivisions;
-        var axisColor = colorConfig.axis, backgroundColor = colorConfig.background, boundaryColor = colorConfig.boundary, mainGridColor = colorConfig.mainGrid, subGridColor = colorConfig.subGrid, clipColor = colorConfig.clip;
+        var axisColor = colorConfig.axis, backgroundColor = colorConfig.background, boundaryColor = colorConfig.boundary, mainGridColor = colorConfig.mainGrid, subGridColor = colorConfig.subGrid, clipColor = colorConfig.clip, fontColor = colorConfig.font;
         var axisStrokeWeight = strokeWeightConfig.axis, boundaryStrokeWeight = strokeWeightConfig.boundary, mainGridStrokeWeight = strokeWeightConfig.mainGrid, subGridStrokeWeight = strokeWeightConfig.subGrid;
         this.origin = createVector();
         this.pos = createVector();
@@ -126,6 +125,7 @@ var Graph2D = /** @class */ (function () {
         this.mainGridColor = mainGridColor;
         this.subGridColor = subGridColor;
         this.clipColor = clipColor;
+        this.fontColor = fontColor;
         this.axisStrokeWeight = axisStrokeWeight;
         this.boundaryStrokeWeight = boundaryStrokeWeight;
         this.mainGridStrokeWeight = mainGridStrokeWeight;
@@ -197,9 +197,61 @@ var Graph2D = /** @class */ (function () {
         rect(this.pos.x + this.w, 0, width - (this.pos.x + this.w), height);
         rect(0, this.pos.y + this.h, width, height - (this.pos.y + this.h));
     };
+    Graph2D.prototype.markCoords = function () {
+        push();
+        translate(this.pos.x, this.pos.y);
+        this.markXCoords();
+        this.markYCoords();
+        pop();
+    };
     ///////////////////////////////////////
     ////////// Private methods ///////////
     /////////////////////////////////////
+    Graph2D.prototype.markXCoords = function () {
+        var xStart = this.origin.x + this.unitX;
+        var xEnd = this.w;
+        this.drawXCoord(this.origin.x, 0);
+        for (var x = xStart, counter = 1; x < xEnd; x += this.unitX, counter++) {
+            this.drawXCoord(x, counter);
+        }
+        xStart = this.origin.x - this.unitX;
+        xEnd = 0;
+        for (var x = xStart, counter = -1; x > xEnd; x -= this.unitX, counter--) {
+            this.drawXCoord(x, counter);
+        }
+    };
+    Graph2D.prototype.markYCoords = function () {
+        var yStart = this.origin.y + this.unitY;
+        var yEnd = this.h;
+        for (var y = yStart, counter = -1; y < yEnd; y += this.unitY, counter--) {
+            this.drawYCoord(y, counter);
+        }
+        yStart = this.origin.y - this.unitY;
+        yEnd = 0;
+        for (var y = yStart, counter = 1; y > yEnd; y -= this.unitY, counter++) {
+            this.drawYCoord(y, counter);
+        }
+    };
+    Graph2D.prototype.drawXCoord = function (coord, value) {
+        push();
+        fill(this.fontColor);
+        textSize(this.unitX / 2.5);
+        strokeWeight(1);
+        stroke(0);
+        textAlign(CENTER);
+        text(value, coord, this.origin.y + this.unitY / 2);
+        pop();
+    };
+    Graph2D.prototype.drawYCoord = function (coord, value) {
+        push();
+        fill(this.fontColor);
+        textSize(this.unitY / 2.5);
+        strokeWeight(1);
+        stroke(0);
+        textAlign(RIGHT);
+        text(value, this.origin.x - 5, coord + this.unitY / 8);
+        pop();
+    };
     Graph2D.prototype.drawBoundingRect = function () {
         fill(this.backgroundColor);
         strokeWeight(this.boundaryStrokeWeight);
@@ -215,7 +267,7 @@ var Graph2D = /** @class */ (function () {
     Graph2D.prototype.drawMainVerticalGridLines = function () {
         var xStart = this.origin.x + this.unitX;
         var xEnd = this.w;
-        for (var x = xStart; x < xEnd; x += this.unitX) {
+        for (var x = xStart, counter = 1; x < xEnd; x += this.unitX, counter++) {
             this.drawVerticalGridLine(x);
         }
         xStart = this.origin.x - this.unitX;
