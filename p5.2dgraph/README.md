@@ -31,6 +31,8 @@ function drawGraph() {
 ```
 [See in online web editor](https://editor.p5js.org/jithunni.ks/sketches/hsjmQ_Kwl)
 
+## Configuring the graph
+
 The default config for the graph is 
 ```
 const colorConfig = {
@@ -81,4 +83,6 @@ let defaultConfig = {
     unitY: 50
   }
 }
+// Passing the config to the constructor
+p52dGraph = new P52dGraph(defaultConfig)
 ```
