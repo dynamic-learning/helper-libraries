@@ -30,3 +30,55 @@ function drawGraph() {
 }
 ```
 [See in online web editor](https://editor.p5js.org/jithunni.ks/sketches/hsjmQ_Kwl)
+
+The default config for the graph is 
+```
+const colorConfig = {
+    axis: 255,
+    background: 0,
+    boundary: 100,
+    mainGrid: [0, 90, 130],
+    subGrid: 40,
+    clip:0,
+    font:255
+  };
+  
+  const basicConfig = {
+    x: 50,
+    y: 50,
+    w: 500,
+    h: 300,
+    originX: 250,
+    originY: 150,
+    unitX: 40,
+    unitY: 40,
+    unitXDivisions: 2,
+    unitYDivisions: 2,
+  };
+  
+  const strokeWeightConfig = {
+    axis: 3,
+    boundary: 1,
+    mainGrid: 2,
+    subGrid: 1,
+  };
+   
+  // Default config
+  let defaultConfig = {
+    basicConfig,
+    colorConfig,
+    strokeWeightConfig,
+  };
+```
+If you wish to override any property, say for example the background color and unitX width, you can pass the below object to the graph constructor
+```
+let defaultConfig = {
+  colorConfig: {
+    background: [255,0,0]
+  },
+  basicConfig: {
+    unitX: 50,
+    unitY: 50
+  }
+}
+```
