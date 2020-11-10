@@ -79,8 +79,7 @@ let defaultConfig = {
     background: [255,0,0]
   },
   basicConfig: {
-    unitX: 50,
-    unitY: 50
+    unitX: 50
   }
 }
 // Passing the config to the constructor
