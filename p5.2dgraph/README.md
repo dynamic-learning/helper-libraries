@@ -65,7 +65,7 @@ const colorConfig = {
     subGrid: 1,
   };
    
-  // Default config
+  // z config
   let defaultConfig = {
     basicConfig,
     colorConfig,
@@ -74,7 +74,7 @@ const colorConfig = {
 ```
 If you wish to override any property, say for example the background color and unitX width, you can pass the below object to the graph constructor
 ```
-let defaultConfig = {
+let overridenConfig = {
   colorConfig: {
     background: [255,0,0]
   },
@@ -83,7 +83,7 @@ let defaultConfig = {
   }
 }
 // Passing the config to the constructor
-p52dGraph = new P52dGraph(defaultConfig)
+p52dGraph = new P52dGraph(overridenConfig)
 ```
 
 ## Interfaces
