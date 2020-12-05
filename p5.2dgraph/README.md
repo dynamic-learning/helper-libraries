@@ -29,11 +29,13 @@ function drawGraph() {
   p52dGraph.clip();
 }
 ```
+
 [See in online web editor](https://editor.p5js.org/jithunni.ks/sketches/hsjmQ_Kwl)
 
 ## Configuring the graph
 
-The default config for the graph is 
+The default config for the graph is
+
 ```
 const colorConfig = {
     axis: 255,
@@ -44,7 +46,7 @@ const colorConfig = {
     clip:0,
     font:255
   };
-  
+
   const basicConfig = {
     x: 50,
     y: 50,
@@ -57,14 +59,14 @@ const colorConfig = {
     unitXDivisions: 2,
     unitYDivisions: 2,
   };
-  
+
   const strokeWeightConfig = {
     axis: 3,
     boundary: 1,
     mainGrid: 2,
     subGrid: 1,
   };
-   
+
   // z config
   let defaultConfig = {
     basicConfig,
@@ -72,7 +74,9 @@ const colorConfig = {
     strokeWeightConfig,
   };
 ```
+
 If you wish to override any property, say for example the background color and unitX width, you can pass the below object to the graph constructor
+
 ```
 let overridenConfig = {
   colorConfig: {
@@ -89,6 +93,7 @@ p52dGraph = new P52dGraph(overridenConfig)
 ## Interfaces
 
 ### To be called in the draw function
+
 1.  display()
 2.  drawMainGrid()
 3.  drawSubGrid()
@@ -97,14 +102,24 @@ p52dGraph = new P52dGraph(overridenConfig)
 6.  clip()
 
 ### Can be called anywhere to get the coordinates and pixels
-7.  getX(xPixel:number)
-Returns the x coodinate in graph corresponding to x pixel
 
-8.  getY(yPixel:number)
-Returns the y coodinate in graph corresponding to y pixel
+7.  getXCoord(xPixel:number)
+    Returns the x coodinate in graph corresponding to x pixel
+
+8.  getYCoord(yPixel:number)
+    Returns the y coodinate in graph corresponding to y pixel
 
 9.  getXPixel(x:number)
-Returns the x pixel corresponding to x coordinate
+    Returns the x pixel corresponding to x coordinate
 
 10. getYPixel(y:number)
-Returns the y pixel corresponding to y coordinate
+    Returns the y pixel corresponding to y coordinate
+
+11. getPos()
+    Returns the position object of the topleft corner of the graph
+
+12. getHeight()
+    Returns the height of the graph
+
+13. getWidth()
+    Returns the width of the graph

@@ -168,11 +168,19 @@ class P52dGraph {
     rect(0,this.pos.y+this.h,width,height-(this.pos.y+this.h));
   }
 
-  public getX = (xPixel: number) => {
+  public markCoords() {
+    push();
+    translate(this.pos.x, this.pos.y);
+    this.markXCoords();
+    this.markYCoords();
+    pop();
+  }
+
+  public getXCoord = (xPixel: number) => {
     return (xPixel - this.pos.x - this.origin.x) / this.unitX;
   };
 
-  public getY = (yPixel: number) => {
+  public getYCoord = (yPixel: number) => {
     return (yPixel - this.pos.y - this.origin.y) / -this.unitY;
   };
 
@@ -184,14 +192,34 @@ class P52dGraph {
     return this.pos.y + this.origin.y - y * this.unitY;
   };
 
-  public markCoords() {
-    push();
-    translate(this.pos.x, this.pos.y);
-    this.markXCoords();
-    this.markYCoords();
-    pop();
+  public getPos() {
+    return this.pos;
   }
 
+  public getWidth() {
+    return this.w;
+  }
+
+  public getHeight() {
+    return this.h;
+  }
+
+  public getUnitX() {
+    return this.unitX;
+  }
+
+  public getUnitY() {
+    return this.unitY;
+  }
+
+  public getUnitXDivision() {
+    return this.unitXDivisions;
+  }
+
+  public getUnitYDivision() {
+    return this.unitYDivisions;
+  }
+  
   ///////////////////////////////////////
   ////////// Private methods ///////////
   /////////////////////////////////////

@@ -59,10 +59,10 @@ var isScrolling;
 var P52dGraph = /** @class */ (function () {
     function P52dGraph(config) {
         var _this = this;
-        this.getX = function (xPixel) {
+        this.getXCoord = function (xPixel) {
             return (xPixel - _this.pos.x - _this.origin.x) / _this.unitX;
         };
-        this.getY = function (yPixel) {
+        this.getYCoord = function (yPixel) {
             return (yPixel - _this.pos.y - _this.origin.y) / -_this.unitY;
         };
         this.getXPixel = function (x) {
@@ -203,6 +203,27 @@ var P52dGraph = /** @class */ (function () {
         this.markXCoords();
         this.markYCoords();
         pop();
+    };
+    P52dGraph.prototype.getPos = function () {
+        return this.pos;
+    };
+    P52dGraph.prototype.getWidth = function () {
+        return this.w;
+    };
+    P52dGraph.prototype.getHeight = function () {
+        return this.h;
+    };
+    P52dGraph.prototype.getUnitX = function () {
+        return this.unitX;
+    };
+    P52dGraph.prototype.getUnitY = function () {
+        return this.unitY;
+    };
+    P52dGraph.prototype.getUnitXDivision = function () {
+        return this.unitXDivisions;
+    };
+    P52dGraph.prototype.getUnitYDivision = function () {
+        return this.unitYDivisions;
     };
     ///////////////////////////////////////
     ////////// Private methods ///////////
