@@ -88,9 +88,16 @@ p52dGraph = new P52dGraph(defaultConfig)
 
 ## Interfaces
 
-1. display()
-2. drawMainGrid()
-3. drawSubGrid()
-4. pan()
-5. zoom()
-6. clip()
+### To be called in the draw function
+1.  display()
+2.  drawMainGrid()
+3.  drawSubGrid()
+4.  pan()
+5.  zoom()
+6.  clip()
+
+### Can be called anywhere to get the coordinates and pixels
+7.  getXPixel()
+8.  getYPixel()
+9.  getXCoord()
+10. getYCoord()
