@@ -85,3 +85,12 @@ let defaultConfig = {
 // Passing the config to the constructor
 p52dGraph = new P52dGraph(defaultConfig)
 ```
+
+## Interfaces
+
+1. display()
+2. drawMainGrid()
+3. drawSubGrid()
+4. pan()
+5. zoom()
+6. clip()
