@@ -97,7 +97,14 @@ p52dGraph = new P52dGraph(defaultConfig)
 6.  clip()
 
 ### Can be called anywhere to get the coordinates and pixels
-7.  getXPixel()
-8.  getYPixel()
-9.  getXCoord()
-10. getYCoord()
+7.  getX(xPixel:number)
+Returns the x coodinate in graph corresponding to x pixel
+
+8.  getY(yPixel:number)
+Returns the y coodinate in graph corresponding to y pixel
+
+9.  getXPixel(x:number)
+Returns the x pixel corresponding to x coordinate
+
+10. getYPixel(y:number)
+Returns the y pixel corresponding to y coordinate
