@@ -225,10 +225,9 @@ class P52dGraph {
   /////////////////////////////////////
 
   private markXCoords() {
-    let xStart = this.origin.x + this.unitX;
+    let xStart = this.origin.x;
     let xEnd = this.w;
-    this.drawXCoord(this.origin.x, 0)
-    for (let x = xStart, counter=1; x < xEnd; x += this.unitX,counter++) {
+    for (let x = xStart, counter=0; x < xEnd; x += this.unitX,counter++) {
       this.drawXCoord(x, counter)
     }
     xStart = this.origin.x - this.unitX;
@@ -257,8 +256,8 @@ class P52dGraph {
     textSize(this.unitX/2.5);
     strokeWeight(1)
     stroke(0);
-    textAlign(CENTER);
-    text(value, coord, this.origin.y+this.unitY/2)
+    textAlign(RIGHT);
+    text(value, coord-this.unitX/6, this.origin.y+this.unitY/2)
     pop();
   }
 
@@ -269,7 +268,7 @@ class P52dGraph {
     strokeWeight(1)
     stroke(0);
     textAlign(RIGHT);
-    text(value, this.origin.x-5, coord+this.unitY/8)
+    text(value, this.origin.x-this.unitX/6 , coord+this.unitY/2.5)
     pop();
   }
 
