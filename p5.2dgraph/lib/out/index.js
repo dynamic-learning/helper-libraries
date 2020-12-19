@@ -231,7 +231,7 @@ var P52dGraph = /** @class */ (function () {
     P52dGraph.prototype.markXCoords = function () {
         var xStart = this.origin.x;
         var xEnd = this.w;
-        for (var x = xStart, counter = 0; x < xEnd; x += this.unitX, counter++) {
+        for (var x = xStart, counter = 0; x < xEnd + this.unitX; x += this.unitX, counter++) {
             this.drawXCoord(x, counter);
         }
         xStart = this.origin.x - this.unitX;
@@ -248,7 +248,7 @@ var P52dGraph = /** @class */ (function () {
         }
         yStart = this.origin.y - this.unitY;
         yEnd = 0;
-        for (var y = yStart, counter = 1; y > yEnd; y -= this.unitY, counter++) {
+        for (var y = yStart, counter = 1; y > yEnd - this.unitY; y -= this.unitY, counter++) {
             this.drawYCoord(y, counter);
         }
     };

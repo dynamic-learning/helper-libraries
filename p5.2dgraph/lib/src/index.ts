@@ -227,7 +227,7 @@ class P52dGraph {
   private markXCoords() {
     let xStart = this.origin.x;
     let xEnd = this.w;
-    for (let x = xStart, counter=0; x < xEnd; x += this.unitX,counter++) {
+    for (let x = xStart, counter=0; x < xEnd + this.unitX; x += this.unitX,counter++) {
       this.drawXCoord(x, counter)
     }
     xStart = this.origin.x - this.unitX;
@@ -245,7 +245,7 @@ class P52dGraph {
     }
     yStart = this.origin.y - this.unitY;
     yEnd = 0;
-    for (let y = yStart, counter=1; y > yEnd; y -= this.unitY, counter++) {
+    for (let y = yStart, counter=1; y > yEnd-this.unitY; y -= this.unitY, counter++) {
       this.drawYCoord(y, counter)
     }
   }
