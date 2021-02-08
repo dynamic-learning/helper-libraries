@@ -4,6 +4,8 @@ Utility function that helps you to draw a numberline at a defined location, mark
 
 ![Preview](https://i.ibb.co/tDsb265/Screenshot-from-2021-02-08-08-40-30.png)
 
+![Preview](https://s2.gifyu.com/images/Peek-2021-02-08-08-52.gif)
+
 ### Interface
 
 1. getPix(x)
