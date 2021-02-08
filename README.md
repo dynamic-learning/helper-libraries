@@ -8,6 +8,6 @@ Create a copy of the folder [typescript-starter](https://github.com/dynamic-lear
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/dynamic-learning/helper-libraries/tree/main/p5.rnd"><img src="https://s8.gifyu.com/images/ezgif.com-resizead6fdb07fe2952a1.gif" width="100px;" alt=""/><br /><sub><b>p5.rnd</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/dynamic-learning/helper-libraries/tree/main/p5.rnd"><img src="https://s8.gifyu.com/images/ezgif.com-resizead6fdb07fe2952a1.gif" width="150px;" alt=""/><br /><sub><b>p5.rnd</b></sub></a><br /></td>
   </tr>
  </table>
