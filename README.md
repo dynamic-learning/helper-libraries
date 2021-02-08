@@ -14,3 +14,5 @@ Create a copy of the folder [typescript-starter](https://github.com/dynamic-lear
        <td align="center"><a href="https://github.com/dynamic-learning/helper-libraries/tree/main/p5.arrow"><img src="https://s2.gifyu.com/images/Peek-2021-02-08-09-25.gif" width="200px;" alt=""/><br /><sub><b>p5.arrow</b></sub></a><br /></td>
   </tr> 
  </table>
+
+Note - these libraries are not in anyway conntected to p5 library, its just that for using these libraries, you need p5 also imported, hence the libraries start with `p5.`
